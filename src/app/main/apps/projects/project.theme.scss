@@ -1,0 +1,23 @@
+
+// <!-- -------------Auteur : MAHAMADOU ALIO , mahamadoualio05@gmail.com-------------- -->
+
+
+@mixin dashboards-project-theme($theme) {
+
+    $background: map-get($theme, background);
+    $is-dark: map-get($theme, is-dark);
+
+    #dashboard-project {
+
+        > .center {
+
+            > .content {
+                @if ($is-dark) {
+                    background: map-get($background, background);
+                } @else {
+                    background: map-get($background, app-bar);
+                }
+            }
+        }
+    }
+}

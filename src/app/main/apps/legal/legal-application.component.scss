@@ -1,0 +1,84 @@
+// <!-- -------------Auteur : MAHAMADOU ALIO , mahamadoualio05@gmail.com-------------- -->
+
+p {
+  font-family: Lato;
+}
+
+.example-card {
+  // max-width: 300px;
+  margin: 12px;
+  height: 200px;
+  width: 220px;
+
+}
+
+
+.image-title{
+
+background-image:url("assets/PT.jpg");
+
+}
+
+.example-header-image {
+  background-image:url("assets/PT.jpg");
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+
+
+}
+.btn{
+height: 200px;
+width: 220px;
+}
+
+.example-card1{
+// // margin: 8px;
+// height: 160px;
+// width: 220px;
+// // pour deplacer le card ver la gauche
+// // left: -25px;    
+// // margin-top:20px;
+// // bottom: 20px;
+
+height: 200px;
+width: 220px;
+left: -25px;
+margin-top: 20px;
+bottom: 20px;
+
+
+}
+.title-position {
+margin: 80px;
+
+}
+
+.image-taille {
+
+height:90px;
+width: 100px;
+// background-color: #000000;
+
+}
+
+.panel-footer {
+padding: -5px 15px;
+background-color:
+#ffff;
+left: 0px; 
+width:220px;
+border-top: 1px solid #0000;
+border-bottom-right-radius: 3px;
+border-bottom-left-radius: 3px;
+// margin-left: -20px;  // decaler vert la gauche
+// margin-top: 60px;    // decaler vert le bas
+
+margin-left: -110px;
+margin-top: 90px;
+
+
+}

@@ -1,0 +1,103 @@
+<!-- // -------------Auteur : MAHAMADOU ALIO , mahamadoualio05@gmail.com------------------->
+
+<!-- // -------------le component principale------------------------------------------- -->
+
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+
+    <!-- HEADER -->
+    <div class="header red p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="space-between center">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+
+
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Airtel apps
+                </span>
+            </div>
+
+        </div>
+
+        <div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+
+            <div class="search-wrapper mt-16 mt-sm-0">
+
+
+            </div>
+
+        </div>
+        <!-- / SEARCH -->
+
+    </div>
+
+
+
+    <div class="content">
+
+        <!-- CENTER -->
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+
+            <!---------ANGULAR TABS: LA BAR DE NAVIGATION-------------------- -->
+            <div class="content">
+                <mat-tab-group dynamicHeight>
+
+                    <!-- --------------TOUTES LES APPLICATIONS ----------------->
+                    <mat-tab label="ALL APPS">
+                        <all-application></all-application>
+                    </mat-tab>
+
+                    <!-- -------------- LES APPLICATIONS DE CXD ----------------->
+                    <mat-tab label="CXD">
+                        <cx-application></cx-application>
+                    </mat-tab>
+
+                    <!-- -------------- LES APPLICATIONS DE AM ----------------->
+                    <mat-tab label="AM">
+                        <am-application></am-application>
+                    </mat-tab>
+
+                    <!-- -------------- LES APPLICATIONS DE MDM ----------------->
+                    <mat-tab label="MDM">
+                        <mdm></mdm>
+                    </mat-tab>
+
+                    <!-- -------------- LES APPLICATIONS DE FINANCE ----------------->
+                    <mat-tab label="FINANCE">
+                        <finance-application></finance-application>
+                    </mat-tab>
+
+                    <!-- -------------- LES APPLICATIONS DE SALES ----------------->
+                    <mat-tab label="SALES">
+                        <sales-application></sales-application>
+                    </mat-tab>
+
+                    <!-- -------------- LES APPLICATIONS DE LEGAL ----------------->
+                    <mat-tab label="LEGAL">
+                        <legal-application></legal-application>
+                    </mat-tab>
+
+                    <!-- -------------- LES APPLICATIONS DE LEGAL ----------------->
+                    <mat-tab label="HR">
+                        <hr-application></hr-application>
+                    </mat-tab>
+
+                </mat-tab-group>
+            </div>
+
+
+
+
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CENTER -->
+
+    </div>
+    <!-- / CONTENT-->
+
+</div>
