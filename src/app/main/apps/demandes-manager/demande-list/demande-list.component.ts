@@ -1,18 +1,16 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
-import { DemandesService } from '../demandes.service';
-import { FormDialogDemandeComponent } from '../demande-form/demande-form.component';
-import { Demande } from '../../demandes-directeur/demande.model';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {DataSource} from '@angular/cdk/collections';
+import {Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {fuseAnimations} from '@fuse/animations';
+import {FuseConfirmDialogComponent} from '@fuse/components/confirm-dialog/confirm-dialog.component';
+import {DemandesService} from '../demandes.service';
+import {FormDialogDemandeComponent} from '../demande-form/demande-form.component';
+import {Demande} from '../../demandes-directeur/demande.model';
 import {RequestState} from '../../../../models/request-state';
-import { FormDialogDemandesComponent } from '../demandes-form/demande-form.component';
-import { FormCommentaireComponent } from '../commentaire-form/commentaire-form.component';
-DemandesService
+import {FormCommentaireComponent} from '../commentaire-form/commentaire-form.component';
+
 @Component({
     selector: 'demandes-list',
     templateUrl: './demande-list.component.html',
@@ -27,18 +25,18 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
     demandes: any;
     demande: any;
     dataSource: FilesDataSource | null;
-    displayedColumns = ['nom', 'prenom','direction', 'typeDemande', 'description','state', 'createdAt', 'buttons'];
+    displayedColumns = ['nom', 'prenom', 'direction', 'typeDemande', 'description', 'state', 'createdAt', 'buttons'];
     selectedDemandes: any[];
     checkboxes: {};
     dialogRef: any;
-     words = [];
-    
+    words = [];
+
     confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
 
     // Private
     private _unsubscribeAll: Subject<any>;
 
-  
+
     constructor(
         private _demandesService: DemandesService,
         public _matDialog: MatDialog
@@ -49,16 +47,16 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.dataSource = new FilesDataSource(this._demandesService);
-        console.log(this.dataSource)
+        console.log(this.dataSource);
         this._demandesService.onDemandesChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(demandes => {
                 this.demandes = demandes;
-                console.log(this.demandes)
+                console.log(this.demandes);
                 this.checkboxes = {};
                 demandes.map(demande => {
                     this.checkboxes[demande.id] = false;
-                    
+
                 });
             });
 
@@ -89,14 +87,14 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
     }
 
 
-
     ngOnDestroy(): void {
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
 
     inprogress(demande: Demande): boolean {
-        switch (demande.state) {
+        return demande.state === RequestState.INITIAL;
+        /*switch (demande.state) {
             case RequestState.INITIAL:
             case RequestState.APPROVED_MANAGER:
             case RequestState.APPROVED_DIRECTOR:
@@ -105,10 +103,10 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
             default:
                 return false;
 
-        }
+        }*/
     }
 
-     editDemande(demande: Demande): void {
+    editDemande(demande: Demande): void {
         this.dialogRef = this._matDialog.open(FormDialogDemandeComponent, {
             panelClass: 'demandes-form-dialog',
             data: {
@@ -126,7 +124,7 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
                 demande.etat.toString();
                 switch (actionType) {
                     case 'ACCEPTER':
-                           demande.etatmanager = 'ACCEPTER';
+                        demande.etatmanager = 'ACCEPTER';
                         break;
                     case 'REJETER':
                         demande.etatmanager = 'REJETER';
@@ -137,8 +135,6 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
 
             });
     }
-
-
 
 
     commentaireSignateur(demande: Demande): void {
@@ -159,7 +155,7 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
                 demande.etat.toString();
                 switch (actionType) {
                     case 'ACCEPTER':
-                           demande.etatmanager = 'ACCEPTER';
+                        demande.etatmanager = 'ACCEPTER';
                         break;
                     case 'REJETER':
                         demande.etatmanager = 'REJETER';
@@ -170,8 +166,6 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
 
             });
     }
-
-    
 
 
     deleteDemande(demande): void {
@@ -191,7 +185,7 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
 
     }
 
- 
+
     onSelectedChange(demandeId): void {
         this._demandesService.toggleSelectedDemande(demandeId);
     }
@@ -204,8 +198,7 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
     toggleStar(demandeId): void {
         if (this.demande.starred.includes(demandeId)) {
             this.demande.starred.splice(this.demande.starred.indexOf(demandeId), 1);
-        }
-        else {
+        } else {
             this.demande.starred.push(demandeId);
         }
 
@@ -215,10 +208,8 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
 }
 
 
+export class FilesDataSource extends DataSource<any> {
 
-export class FilesDataSource extends DataSource<any>
-{
-  
     constructor(
         private _demandesService: DemandesService
     ) {

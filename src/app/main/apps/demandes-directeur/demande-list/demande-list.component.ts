@@ -1,22 +1,23 @@
-import { Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil, window } from 'rxjs/operators';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
-import { DemandesService } from '../demandes.service';
-import { FormDialogDemandeComponent } from '../demande-form/demande-form.component';
-import { Demande } from '../demande.model';
-import { FormDialogTransfertDemandeComponent } from '../demande-form-transfert/demande-form-transfert.component';
-import { FormDialogTransfertDemandeDirecteurComponent } from '../demande-form-transfert-directeur/demande-form-transfert-directeur.component';
-import { RequestState } from '../../../../models/request-state';
+import {Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {DataSource} from '@angular/cdk/collections';
+import {Observable, Subject} from 'rxjs';
+import {takeUntil, window} from 'rxjs/operators';
+import {fuseAnimations} from '@fuse/animations';
+import {FuseConfirmDialogComponent} from '@fuse/components/confirm-dialog/confirm-dialog.component';
+import {DemandesService} from '../demandes.service';
+import {FormDialogDemandeComponent} from '../demande-form/demande-form.component';
+import {Demande} from '../demande.model';
+import {FormDialogTransfertDemandeComponent} from '../demande-form-transfert/demande-form-transfert.component';
+import {FormDialogTransfertDemandeDirecteurComponent} from '../demande-form-transfert-directeur/demande-form-transfert-directeur.component';
+import {RequestState} from '../../../../models/request-state';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 // import { AIRTEL_HEADER } from 'environments/logo';
 import * as impression from './impression';
-import { FormDialogDemandesComponent } from '../../demandes-manager/demandes-form/demande-form.component';
+import {FormDialogDemandesComponent} from '../../demandes-manager/demandes-form/demande-form.component';
+
 declare var jsPDF: any;
 
 @Component({
@@ -102,6 +103,10 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
 
     }
 
+    displayUpdateButton(demande: Demande): boolean {
+        return demande.state === RequestState.APPROVED_MANAGER;
+    }
+
     editDemande(demande: Demande): void {
         this.dialogRef = this._matDialog.open(FormDialogDemandeComponent, {
             panelClass: 'demande-form-dialog',
@@ -127,7 +132,7 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
                         break;
                 }
                 this._demandesService.signatureDemande(demande);
-                this._demandesService.updateState({ requestId: demande ? demande.id : 0, isApproved: actionType }).then();
+                this._demandesService.updateState({requestId: demande ? demande.id : 0, isApproved: actionType}).then();
 
 
             });
@@ -214,7 +219,6 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
     }
 
 
-
     //  +++++++++++++++++++++++++++++++ cette methode nous permet de generer un dpf ++++++++++++++++++++++
 
     generatePDF(demande: Demande) {
@@ -271,10 +275,8 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
                     break;
 
 
-
             }
-        }
-        else {
+        } else {
             impression.generationDemandeExemple(demande);
         }
     }
@@ -294,11 +296,7 @@ export class ListDemandesComponent implements OnInit, OnDestroy {
     }
 
 
-
-
 }
-
-
 
 
 export class FilesDataSource extends DataSource<any> {
